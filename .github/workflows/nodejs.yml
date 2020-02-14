@@ -27,7 +27,7 @@ jobs:
         echo ">>> npm build done"
         cp -R build/static/js ../static
         cp -R build/static/css ../static
-        cp -R build/static/index.html ../static/app.html
+        cp -R build/index.html ../static/app.html
         echo ">>> done"
     - name: Create Pull Request
       id: cpr
