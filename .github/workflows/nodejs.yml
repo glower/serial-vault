@@ -22,11 +22,13 @@ jobs:
         pwd
         cd webapp-admin
         npm install
-        npm run build --if-present
-        npm test
+        echo ">>> npm install done"
+        npm run build
+        echo ">>> npm build done"
         cp -R build/static/js ../static
         cp -R build/static/css ../static
         cp -R build/static/index.html ../static/app.html
+        echo ">>> done"
     - name: Create Pull Request
       id: cpr
       uses: peter-evans/create-pull-request@v2
