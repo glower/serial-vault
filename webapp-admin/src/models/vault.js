@@ -19,6 +19,7 @@ import Ajax from './Ajax';
 var Vault = {
 
 	version: function () {
+			console.log("Vault.version")
 			return Ajax.get('version');
 	}
 }
