@@ -20,6 +20,7 @@ var Assertion = {
 	url: 'assertions',
 
 	create:  function(assert) {
+		console.log("Assertion.create")
 		return Ajax.post(this.url, assert);
 	}
 }
