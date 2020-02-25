@@ -18,7 +18,7 @@ jobs:
         node-version: 12.x
     - name: Check frontend changes
       run: |
-        ::set-env name=run_frontend_build::$(git diff-tree --name-only HEAD | grep webapp-admin)
+        echo ::set-env name=run_frontend_build::$(git diff-tree --name-only HEAD | grep webapp-admin)
     - name: Build frontend
       run: |
         cd webapp-admin
