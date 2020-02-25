@@ -1,38 +1,35 @@
+ 
 name: Node.js CI
 
 on:
   push:
     branches: master
-  watch:
-    types: [started]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js 12.x
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
+    - name: Check frontend changes
+      run: |
+        git diff-tree --name-only HEAD | grep webapp-admin
+        $? || exit 1
     - name: Build frontend
       run: |
-        pwd
         cd webapp-admin
         npm install
-        echo ">>> npm install done"
         npm run build
-        echo ">>> npm build done"
         cp -R build/static/js ../static
         cp -R build/static/css ../static
         cp -R build/index.html ../static/app.html
-        echo ">>> done"
     - name: Create Pull Request
       id: cpr
       uses: peter-evans/create-pull-request@v2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: Add js/css files
-        title: '[Example] Automated javascript build'
+        commit-message: Added js/css files
+        title: 'Automated javascript build'
