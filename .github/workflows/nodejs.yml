@@ -1,12 +1,10 @@
  
 name: Node.js CI
-
 on:
   push:
     branches: master
 env:
   run_frontend_build: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,6 +18,7 @@ jobs:
       run: |
         echo ::set-env name=run_frontend_build::$(git diff-tree --name-only HEAD | grep webapp-admin)
     - name: Build frontend
+      if: run_frontend_build
       run: |
         cd webapp-admin
         npm install
@@ -28,6 +27,7 @@ jobs:
         cp -R build/static/css ../static
         cp -R build/index.html ../static/app.html
     - name: Create Pull Request
+      if: run_frontend_build
       id: cpr
       uses: peter-evans/create-pull-request@v2
       with:
