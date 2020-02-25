@@ -1,8 +1,8 @@
 name: Automated javascript build CI
 on:
   push:
+    paths: 'webapp-admin/**'
     branches: master
-     - 'webapp-admin/**'
 jobs:
   build:
     runs-on: ubuntu-latest
