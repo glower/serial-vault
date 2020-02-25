@@ -1,10 +1,9 @@
  
-name: Node.js CI
+name: Automated javascript build CI
 on:
   push:
     branches: master
-env:
-  run_frontend_build: false
+     - 'webapp-admin/**'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,11 +13,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
-    - name: Check frontend changes
-      run: |
-        echo ::set-env name=run_frontend_build::$(git diff-tree --name-only HEAD | grep webapp-admin)
     - name: Build frontend
-      if: run_frontend_build
       run: |
         cd webapp-admin
         npm install
@@ -27,7 +22,6 @@ jobs:
         cp -R build/static/css ../static
         cp -R build/index.html ../static/app.html
     - name: Create Pull Request
-      if: run_frontend_build
       id: cpr
       uses: peter-evans/create-pull-request@v2
       with:
