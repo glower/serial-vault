@@ -4,6 +4,8 @@ name: Node.js CI
 on:
   push:
     branches: master
+env:
+  run_frontend_build: false
 
 jobs:
   build:
@@ -16,8 +18,7 @@ jobs:
         node-version: 12.x
     - name: Check frontend changes
       run: |
-        git diff-tree --name-only HEAD | grep webapp-admin
-        $? || exit 1
+        ::set-env name=run_frontend_build::$(git diff-tree --name-only HEAD | grep webapp-admin)
     - name: Build frontend
       run: |
         cd webapp-admin
