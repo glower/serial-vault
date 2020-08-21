@@ -1,4 +1,5 @@
 [![Build Status][travis-image]][travis-url]
+
 # Serial Vault
 
 A Go web service that digitally signs device assertion details.

@@ -1,6 +1,7 @@
 ---
+layout: page
 title: "Serial Vault"
-table_of_contents: False
+table_of_contents: true
 ---
 
 # About Serial Vault
@@ -21,3 +22,6 @@ spec’d to reduce lag in response time as much as reasonably possible.
 
 It stores model information and the encrypted signing keys in a database, and can optionally 
 use a TPM module as a part of the encryption process.
+
+* TOC
+{:toc}
